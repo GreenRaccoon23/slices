@@ -11,46 +11,6 @@ import (
 
 var ()
 
-func expect(args ...interface{}) error {
-	switch len(args) {
-	case 0, 1:
-		return fmt.Errorf("Not enough arguments to _expect. Args passed: %v", args)
-	case 2:
-		return _expectBasic(args[0], args[1])
-	default:
-		return _expectLabelled(args[0], args[1], args[2])
-	}
-}
-
-func _expectBasic(result interface{}, expected interface{}) error {
-	if !_areEqual(result, expected) {
-		return fmt.Errorf("Expected '%v' to equal '%v'", result, expected)
-	}
-	return nil
-}
-
-func _expectLabelled(result interface{}, expected interface{}, label interface{}) error {
-	if !_areEqual(result, expected) {
-		return fmt.Errorf("%v: Expected '%v' to equal '%v'", label, result, expected)
-	}
-	return nil
-}
-
-func _areEqual(result interface{}, expected interface{}) bool {
-	return reflect.DeepEqual(result, expected)
-}
-
-func expected(args ...interface{}) error {
-	switch len(args) {
-	case 0, 1:
-		return fmt.Errorf("Not enough arguments to _errExpected. Args passed: %v", args)
-	case 2:
-		return fmt.Errorf("Expected '%v' to equal '%v'", args[0], args[1])
-	default:
-		return fmt.Errorf("%v: Expected '%v' to equal '%v'", args[0], args[1], args[2])
-	}
-}
-
 func TestIsEmpty(t *testing.T) {
 
 	if err := expect(IsEmpty([]string{}), true); err != nil {
@@ -129,3 +89,43 @@ func TestCut(t *testing.T) {
 // 		strings.Replace(TestFileContent, ToFind, ToReplace, -1)
 // 	}
 // }
+
+func expect(args ...interface{}) error {
+	switch len(args) {
+	case 0, 1:
+		return fmt.Errorf("Not enough arguments to _expect. Args passed: %v", args)
+	case 2:
+		return _expectBasic(args[0], args[1])
+	default:
+		return _expectLabelled(args[0], args[1], args[2])
+	}
+}
+
+func _expectBasic(result interface{}, expected interface{}) error {
+	if !_areEqual(result, expected) {
+		return fmt.Errorf("Expected '%v' to equal '%v'", result, expected)
+	}
+	return nil
+}
+
+func _expectLabelled(result interface{}, expected interface{}, label interface{}) error {
+	if !_areEqual(result, expected) {
+		return fmt.Errorf("%v: Expected '%v' to equal '%v'", label, result, expected)
+	}
+	return nil
+}
+
+func _areEqual(result interface{}, expected interface{}) bool {
+	return reflect.DeepEqual(result, expected)
+}
+
+func expected(args ...interface{}) error {
+	switch len(args) {
+	case 0, 1:
+		return fmt.Errorf("Not enough arguments to _errExpected. Args passed: %v", args)
+	case 2:
+		return fmt.Errorf("Expected '%v' to equal '%v'", args[0], args[1])
+	default:
+		return fmt.Errorf("%v: Expected '%v' to equal '%v'", args[0], args[1], args[2])
+	}
+}
