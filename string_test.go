@@ -6,6 +6,9 @@ import (
 	"testing"
 )
 
+// https://golang.org/cmd/go/#hdr-Description_of_testing_flags
+// go test -v -bench string_test.go -benchtime 2s
+
 var ()
 
 func expect(args ...interface{}) error {
