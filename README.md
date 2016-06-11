@@ -11,3 +11,5 @@
     )
 ## Description
 [Go/Golang](https://golang.org/) package with some handy slice methods.
+
+## [Docs](docs.md)
