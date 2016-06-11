@@ -56,16 +56,7 @@ func TestJoin(t *testing.T) {
 	}
 }
 
-func toPointer(s []string) *[]string {
-	return &s
-}
-
 func TestCut(t *testing.T) {
-
-	s := []string{}
-	u := []string{}
-	t.Logf("1%#v:", toPointer(s))
-	t.Logf("2%#v:", toPointer(u))
 
 	if err := expect(Cut([]string{}, 0, -1), []string{}); err != nil {
 		t.Error(err)
