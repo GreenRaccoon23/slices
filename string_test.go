@@ -11,8 +11,8 @@ import (
 // go test -v string* -bench '.' -benchtime 2s
 
 var (
-	// DoFailAll bool = false
-	DoFailAll bool = true
+	DoFailAll bool = false
+	// DoFailAll bool = true
 )
 
 func TestContains(t *testing.T) {
@@ -23,7 +23,12 @@ func TestContains(t *testing.T) {
 
 	anyOldMatter := []string{"a", "snail", "on", "the", "tail", "of", "the", "frog", "on", "the", "bump", "on", "this", "log", "that", "I", "found", "in", "a", "hole", "in", "the", "bottom", "of", "the", "sea"}
 	errPrefix := "Ehhh wha? Dr. Farnsworth"
+
 	if err := expect(Contains(anyOldMatter, "snail"), true, errPrefix); err != nil {
+		t.Error(err)
+	}
+
+	if err := expect(Contains(anyOldMatter, "the ultimate secret of the universe"), false, errPrefix); err != nil {
 		t.Error(err)
 	}
 }
