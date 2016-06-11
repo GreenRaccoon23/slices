@@ -89,9 +89,9 @@ Package slices is a collection of handy methods for string slices.
 </div><!-- #pkg-index -->
 
 <div id="pkg-callgraph" class="toggle" style="display: none">
-<div class="collapsed">
+<!-- <div class="collapsed">
 <h2 class="toggleButton" title="Click to show Internal Call Graph section">Internal call graph ▹</h2>
-</div> <!-- .expanded -->
+</div>  --><!-- .expanded -->
 <div class="expanded">
 <h2 class="toggleButton" title="Click to hide Internal Call Graph section">Internal call graph ▾</h2>
 <p>
@@ -123,7 +123,7 @@ Package slices is a collection of handy methods for string slices.
 <!-- Zero means show all package entry points. -->
 <ul style="margin-left: 0.5in" id="callgraph-0" class="treeview"></ul>
 </div>
-</div> <!-- #pkg-callgraph -->
+</div><!-- #pkg-callgraph -->
 
 
 
