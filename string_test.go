@@ -105,7 +105,7 @@ func _expect(boolWanted bool, args ...interface{}) error {
 	expected := args[1]
 
 	if boolReceived := _areEqual(result, expected); boolReceived != boolWanted {
-		return _errExpected(args...)
+		return _errExpected(boolWanted, args...)
 	}
 	return nil
 }
@@ -114,15 +114,20 @@ func _areEqual(result interface{}, expected interface{}) bool {
 	return reflect.DeepEqual(result, expected)
 }
 
-func _errExpected(args ...interface{}) error {
+func _errExpected(boolWanted bool, args ...interface{}) error {
+
+	condition := "to equal"
+	if boolWanted == false {
+		condition = "not to equal"
+	}
 
 	result := args[0]
 	expected := args[1]
 
 	switch len(args) {
 	case 2:
-		return fmt.Errorf("Expected '%v' to equal '%v'", result, expected)
+		return fmt.Errorf("Expected '%v' %v '%v'", result, condition, expected)
 	default:
-		return fmt.Errorf("%v: Expected '%v' to equal '%v'", args[2], result, expected)
+		return fmt.Errorf("%v: Expected '%v' %v '%v'", args[2], result, condition, expected)
 	}
 }
