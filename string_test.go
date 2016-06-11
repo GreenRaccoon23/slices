@@ -101,6 +101,14 @@ func TestCompact(t *testing.T) {
 	}
 }
 
+func TestFilter(t *testing.T) {
+	slc1 := []string{"Peter", "Lois", "Chris", "Stewie", "Brian", "Meg"}
+	slc2 := []string{"Peter", "Lois", "Chris", "Stewie", "Brian"}
+	if err := expect(Filter(slc1, "Meg"), slc2); err != nil {
+		t.Error(err)
+	}
+}
+
 func TestPush(t *testing.T) {
 	if err := expect(Push([]string{"not enough"}, "just right"), []string{"not enough", "just right"}); err != nil {
 		t.Error(err)

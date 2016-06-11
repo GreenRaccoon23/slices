@@ -126,6 +126,25 @@ func Compact(bloated []string) (compacted []string) {
 	return
 }
 
+// Remove elements from a slice.
+// Return a copy of a slice with unwanted strings removed.
+// The slice is not modified in place; the original will be unchanged.
+func Filter(unfiltered []string, unwanted ...string) (filtered []string) {
+
+	lenUnfiltered := len(unfiltered)
+	for i := 0; i < lenUnfiltered; i++ {
+		s := unfiltered[i]
+
+		if isUnwanted := Contains(unwanted, s); isUnwanted {
+			continue
+		}
+
+		filtered = append(filtered, s)
+	}
+
+	return
+}
+
 // Add elements to a slice. Return the modified slice.
 func Push(slc []string, args ...string) []string {
 	return append(slc, args...)
@@ -154,22 +173,6 @@ func Unshift(slc []string, s string) []string {
 // Return the removed element along with the modified slice.
 func Shift(slc []string) (string, []string) {
 	return slc[0], slc[1:]
-}
-
-func filter(unfiltered []string, unwanted ...string) (filtered []string) {
-
-	lenUnfiltered := len(unfiltered)
-	for i := 0; i < lenUnfiltered; i++ {
-		s := unfiltered[i]
-
-		if isUnwanted := Contains(unwanted, s); isUnwanted {
-			continue
-		}
-
-		filtered = append(filtered, s)
-	}
-
-	return
 }
 
 func extract(excess []string, wanted ...string) (extracted []string) {
