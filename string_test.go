@@ -101,6 +101,20 @@ func TestPush(t *testing.T) {
 	}
 }
 
+func BenchmarkAppend(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		slc := []string{"deeporange50", "deeporange500", "deeporange900", "deeporangeA100", "deeporangeA200", "deeporangeA400", "deeporangea700", "deeporange-50", "deeporange:500", "deeporange_900", "deeporange A100", "deeporange-A200", "deeporange:A400", "deeporange_A700", "deeporange000", "deeporange1000", "deeporangeA000", "deeporangeA300", "deeporangeA1000", "deeporange:000", "deeporange-1000", "deeporange_A000", "deeporange A300", "deeporange-A1000", "deeporange"}
+		slc = append(slc, "next")
+	}
+}
+
+func BenchmarkPush(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		slc := []string{"deeporange50", "deeporange500", "deeporange900", "deeporangeA100", "deeporangeA200", "deeporangeA400", "deeporangea700", "deeporange-50", "deeporange:500", "deeporange_900", "deeporange A100", "deeporange-A200", "deeporange:A400", "deeporange_A700", "deeporange000", "deeporange1000", "deeporangeA000", "deeporangeA300", "deeporangeA1000", "deeporange:000", "deeporange-1000", "deeporange_A000", "deeporange A300", "deeporange-A1000", "deeporange"}
+		slc = Push(slc, "next")
+	}
+}
+
 func TestPop(t *testing.T) {
 
 	slcBefore := []string{"just enough", "too much"}
