@@ -120,8 +120,6 @@ func errExpected(args ...interface{}) error {
 	expected := args[1]
 
 	switch len(args) {
-	case 0, 1:
-		return fmt.Errorf("Not enough arguments to _errExpected. Args passed: %v", args)
 	case 2:
 		return fmt.Errorf("Expected '%v' to equal '%v'", result, expected)
 	default:
