@@ -119,7 +119,7 @@ func _areEqual(result interface{}, expected interface{}) bool {
 	return reflect.DeepEqual(result, expected)
 }
 
-func expected(args ...interface{}) error {
+func errExpected(args ...interface{}) error {
 	switch len(args) {
 	case 0, 1:
 		return fmt.Errorf("Not enough arguments to _errExpected. Args passed: %v", args)
