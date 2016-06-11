@@ -97,19 +97,7 @@ func Cut(slc []string, iBeg int, iEnd int) []string {
 	return slc[iBeg:iEnd]
 }
 
-// func Cut(slc []string, iBeg int, iEnd int) []string {
-
-// 	if copyAll := (iBeg == 0 && iEnd == -1); copyAll {
-// 		return Copy(slc)
-// 	}
-
-// 	if goToEnd := (iEnd == -1); goToEnd {
-// 		return slc[iBeg:]
-// 	}
-
-// 	return slc[iBeg:iEnd]
-// }
-
+// Return a copy of a slice (different underlying array).
 func Copy(slc []string) []string {
 	newSlc := make([]string, len(slc))
 	copy(newSlc, slc)
