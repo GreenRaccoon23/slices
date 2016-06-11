@@ -2,10 +2,20 @@ package slices
 
 import "bytes"
 
+// Return true if any element in a slice matches a string.
+func Contains(slc []string, s string) bool {
+	lenSlc := len(slc)
+	for i := 0; i < lenSlc; i++ {
+		if slc[i] == s {
+			return true
+		}
+	}
+	return false
+}
+
 // Return true if a slice contains 0 elements
 // or if all elements in a slice have lengths of 0.
 func IsEmpty(slc []string) bool {
-
 	lenSlc := len(slc)
 	for i := 0; i < lenSlc; i++ {
 		if slc[i] != "" {
@@ -120,12 +130,6 @@ func Pop(slc []string) (string, []string) {
 	return popped, cut
 }
 
-// Remove the first element of a slice.
-// Return the removed element along with the modified slice.
-func Shift(slc []string) (string, []string) {
-	return slc[0], slc[1:]
-}
-
 // Insert an element at the beginning of a slice,
 // and move all the rest of the elements up an index.
 // Return the modified slice.
@@ -133,35 +137,10 @@ func Unshift(slc []string, s string) []string {
 	return append([]string{s}, slc...)
 }
 
-// Return true if any element in a slice matches a string.
-func Contains(slc []string, s string) bool {
-	lenSlc := len(slc)
-	for i := 0; i < lenSlc; i++ {
-		if slc[i] == s {
-			return true
-		}
-	}
-	return false
-}
-
-func compact(args ...string) (compacted []string) {
-	lenArgs := len(args)
-	for i := 0; i < lenArgs; i++ {
-		if s := args[i]; s != "" {
-			compacted = append(compacted, s)
-		}
-	}
-	return
-}
-
-func isEmpty(args ...string) bool {
-	lenArgs := len(args)
-	for i := 0; i < lenArgs; i++ {
-		if notEmpty := args[i] != ""; notEmpty {
-			return false
-		}
-	}
-	return true
+// Remove the first element of a slice.
+// Return the removed element along with the modified slice.
+func Shift(slc []string) (string, []string) {
+	return slc[0], slc[1:]
 }
 
 func filter(unfiltered []string, unwanted ...string) (filtered []string) {

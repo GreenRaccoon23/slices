@@ -7,9 +7,21 @@ import (
 )
 
 // https://golang.org/cmd/go/#hdr-Description_of_testing_flags
+// go test -v string*
 // go test -v string* -bench '.' -benchtime 2s
 
 var ()
+
+func TestContains(t *testing.T) {
+	if err := expectNot(Contains([]string{"the", "Griffin", "family"}, "Meg")); err != nil {
+		t.Error(err)
+	}
+
+	slc := []string{"a", "snail", "on", "the", "tail", "of", "the", "frog", "on", "the", "bump", "on", "this", "log", "that", "I", "found", "in", "a", "hole", "in", "the", "bottom", "of", "the", "sea"}
+	if err := expect(Contains(slc, "snail")); err != nil {
+		t.Error(err)
+	}
+}
 
 func TestIsEmpty(t *testing.T) {
 	if err := expect(IsEmpty([]string{}), true); err != nil {
@@ -102,6 +114,12 @@ func TestPop(t *testing.T) {
 	}
 }
 
+func TestUnshift(t *testing.T) {
+	if err := expect(Unshift([]string{"queue"}, "enqueued"), []string{"enqueued", "queue"}); err != nil {
+		t.Error(err)
+	}
+}
+
 func TestShift(t *testing.T) {
 
 	slcBefore := []string{"next", "enqueued"}
@@ -111,24 +129,6 @@ func TestShift(t *testing.T) {
 		t.Error(err)
 	}
 	if err := expect(slcAfter, []string{"enqueued"}); err != nil {
-		t.Error(err)
-	}
-}
-
-func TestUnshift(t *testing.T) {
-	if err := expect(Unshift([]string{"queue"}, "enqueued"), []string{"enqueued", "queue"}); err != nil {
-		t.Error(err)
-	}
-}
-
-func TestContains(t *testing.T) {
-
-	if err := expectNot(Contains([]string{"the", "Griffin", "family"}, "Meg")); err != nil {
-		t.Error(err)
-	}
-
-	slc := []string{"a", "snail", "on", "the", "tail", "of", "the", "frog", "on", "the", "bump", "on", "this", "log", "that", "I", "found", "in", "a", "hole", "in", "the", "bottom", "of", "the", "sea"}
-	if err := expect(Contains(slc, "snail")); err != nil {
 		t.Error(err)
 	}
 }
