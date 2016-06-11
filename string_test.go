@@ -11,17 +11,19 @@ import (
 // go test -v string* -bench '.' -benchtime 2s
 
 var (
-	DoFailAll bool = false
-	// DoFailAll bool = true
+	// DoFailAll bool = false
+	DoFailAll bool = true
 )
 
 func TestContains(t *testing.T) {
-	if err := expectNot(Contains([]string{"the", "Griffin", "family"}, "Meg")); err != nil {
+	theGriffinFamily := []string{"the", "Griffin", "family"}
+	if err := expectNot(Contains(theGriffinFamily, "Meg")); err != nil {
 		t.Error(err)
 	}
 
-	slc := []string{"a", "snail", "on", "the", "tail", "of", "the", "frog", "on", "the", "bump", "on", "this", "log", "that", "I", "found", "in", "a", "hole", "in", "the", "bottom", "of", "the", "sea"}
-	if err := expect(Contains(slc, "snail")); err != nil {
+	anyOldMatter := []string{"a", "snail", "on", "the", "tail", "of", "the", "frog", "on", "the", "bump", "on", "this", "log", "that", "I", "found", "in", "a", "hole", "in", "the", "bottom", "of", "the", "sea"}
+	errPrefix := "Ehhh wha? Dr. Farnsworth"
+	if err := expect(Contains(anyOldMatter, "snail"), true, errPrefix); err != nil {
 		t.Error(err)
 	}
 }
@@ -97,54 +99,69 @@ func TestCopy(t *testing.T) {
 }
 
 func TestCompact(t *testing.T) {
-	slc1 := []string{"Gooo", "", "", "", "", "", "", "", "", "", "", "d", "mor", "", "ning", "Vietnam!"}
-	slc2 := []string{"Gooo", "d", "mor", "ning", "Vietnam!"}
-	if err := expect(Compact(slc1), slc2); err != nil {
+	thsUS := []string{"Gooo", "", "", "", "", "", "", "", "", "", "", "d", "mor", "", "ning", "Vietnam!"}
+	theUK := []string{"Gooo", "d", "mor", "ning", "Vietnam!"}
+	errPrefix := "Robin Williams"
+	if err := expect(Compact(thsUS), theUK, errPrefix); err != nil {
 		t.Error(err)
 	}
 }
 
 func TestFilter(t *testing.T) {
-	slc1 := []string{"Peter", "Lois", "Chris", "Stewie", "Brian", "Meg"}
-	slc2 := []string{"Peter", "Lois", "Chris", "Stewie", "Brian"}
-	if err := expect(Filter(slc1, "Meg"), slc2); err != nil {
+
+	legalFamilyMembers := []string{"Peter", "Lois", "Chris", "Stewie", "Brian", "Meg"}
+	wantedFamilyMembers := []string{"Peter", "Lois", "Chris", "Stewie", "Brian"}
+
+	errPrefix := "Meg, who let you back in the house?"
+
+	if err := expect(Filter(legalFamilyMembers, "Meg"), wantedFamilyMembers, errPrefix); err != nil {
 		t.Error(err)
 	}
 }
 
 func TestExtract(t *testing.T) {
 
-	slc := []string{"Peter", "Lois", "Chris", "Stewie", "Brian"}
+	theGriffins := []string{"Peter", "Lois", "Chris", "Stewie", "Brian"}
 	if DoFailAll {
-		slc = []string{"Peter", "Lois", "Chris", "Stewie", "Brian", "Meg"}
+		theGriffins = []string{"Peter", "Lois", "Chris", "Stewie", "Brian", "Meg"}
 	}
 
-	result := Extract(slc, "Peter", "Stewie", "Meg")
+	theBestGriffins := Extract(theGriffins, "Peter", "Stewie", "Meg")
 	expected := []string{"Peter", "Stewie"}
 
-	if err := expect(result, expected); err != nil {
+	if err := expect(theBestGriffins, expected); err != nil {
 		t.Error(err)
 	}
-	if shutUpMeg := Contains(result, "Meg"); shutUpMeg {
-		t.Error(errExpected(false, result, expected, "Shut up, Meg"))
+	if shutUpMeg := Contains(theBestGriffins, "Meg"); shutUpMeg {
+		t.Error(errExpected(false, theBestGriffins, expected, "Shut up, Meg."))
 	}
 }
 
 func TestPush(t *testing.T) {
-	if err := expect(Push([]string{"not enough"}, "just right"), []string{"not enough", "just right"}); err != nil {
+
+	mamaBear := []string{"not enough"}
+	babyBear := []string{"not enough", "just right"}
+
+	goldilocks := Push(mamaBear, "just right")
+
+	if err := expect(goldilocks, babyBear, "Goldilocks"); err != nil {
 		t.Error(err)
 	}
 }
 
 func TestPop(t *testing.T) {
 
-	slcBefore := []string{"just enough", "too much"}
-	popped, slcAfter := Pop(slcBefore)
+	extraPorridgeHeat := "too much"
 
-	if err := expect(popped, "too much"); err != nil {
+	papaBear := []string{"just right", extraPorridgeHeat}
+	babyBear := []string{"just right"}
+
+	porridgeReview, goldilocks := Pop(papaBear)
+
+	if err := expect(porridgeReview, extraPorridgeHeat, "Goldilocks"); err != nil {
 		t.Error(err)
 	}
-	if err := expect(slcAfter, []string{"just enough"}); err != nil {
+	if err := expect(goldilocks, babyBear, "Goldilocks"); err != nil {
 		t.Error(err)
 	}
 }
@@ -157,13 +174,13 @@ func TestUnshift(t *testing.T) {
 
 func TestShift(t *testing.T) {
 
-	slcBefore := []string{"next", "enqueued"}
-	shifted, slcAfter := Shift(slcBefore)
+	dmvNow := []string{"hope", "eternity"}
+	shifted, dmvTenYearsLater := Shift(dmvNow)
 
-	if err := expect(shifted, "next"); err != nil {
+	if err := expect(shifted, "hope"); err != nil {
 		t.Error(err)
 	}
-	if err := expect(slcAfter, []string{"enqueued"}); err != nil {
+	if err := expect(dmvTenYearsLater, []string{"eternity"}, "Everyone at the DMV"); err != nil {
 		t.Error(err)
 	}
 }
@@ -219,7 +236,7 @@ func errExpected(boolExpected bool, args ...interface{}) error {
 	case 2:
 		return fmt.Errorf("Expected '%v' %v '%v'", result, conditionExpected, expected)
 	default:
-		return fmt.Errorf("%v: Expected '%v' %v '%v'", args[2], result, conditionExpected, expected)
+		return fmt.Errorf("%v expected '%v' %v '%v'", args[2], result, conditionExpected, expected)
 	}
 }
 
