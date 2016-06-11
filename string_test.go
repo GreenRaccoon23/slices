@@ -105,7 +105,7 @@ func _expect(boolWanted bool, args ...interface{}) error {
 	expected := args[1]
 
 	if boolReceived := _areEqual(result, expected); boolReceived != boolWanted {
-		return errExpected(args...)
+		return _errExpected(args...)
 	}
 	return nil
 }
@@ -114,7 +114,7 @@ func _areEqual(result interface{}, expected interface{}) bool {
 	return reflect.DeepEqual(result, expected)
 }
 
-func errExpected(args ...interface{}) error {
+func _errExpected(args ...interface{}) error {
 
 	result := args[0]
 	expected := args[1]
