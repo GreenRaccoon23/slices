@@ -35,6 +35,21 @@ func TestIsEmpty(t *testing.T) {
 	}
 }
 
+func TestEquals(t *testing.T) {
+	slc1 := []string{"same", "elements"}
+	slc2 := []string{"same", "elements"}
+	if err := expect(Equals(slc1, slc2)); err != nil {
+		t.Error(err)
+	}
+}
+
+func TestIsSameArray(t *testing.T) {
+	slc1 := []string{"same elements,", "different arrays"}
+	if slc2 := Cut(slc1, 0, -1); IsSameArray(slc2, slc1) {
+		t.Error(errExpected(false, slc2, slc1))
+	}
+}
+
 func TestConcat(t *testing.T) {
 	if err := expect(Concat([]string{}), ""); err != nil {
 		t.Error(err)
@@ -71,26 +86,17 @@ func TestCut(t *testing.T) {
 	}
 }
 
-func TestIsSameArray(t *testing.T) {
-	slc1 := []string{"same elements,", "different arrays"}
-	if slc2 := Cut(slc1, 0, -1); IsSameArray(slc2, slc1) {
-		t.Error(errExpected(false, slc2, slc1))
-	}
-}
-
-func TestDuplicate(t *testing.T) {
+func TestCopy(t *testing.T) {
 	slc1 := []string{"same elements,", "different arrays"}
 	if slc2 := Copy(slc1); IsSameArray(slc2, slc1) {
 		t.Error(errExpected(false, slc2, slc1))
 	}
 }
 
-func TestEquals(t *testing.T) {
-
-	slc1 := []string{"same", "elements"}
-	slc2 := []string{"same", "elements"}
-
-	if err := expect(Equals(slc1, slc2)); err != nil {
+func TestCompact(t *testing.T) {
+	slc1 := []string{"Gooo", "", "", "", "", "", "", "", "", "", "", "d", "mor", "", "ning", "Vietnam!"}
+	slc2 := []string{"Gooo", "d", "mor", "ning", "Vietnam!"}
+	if err := expect(Compact(slc1), slc2); err != nil {
 		t.Error(err)
 	}
 }
@@ -129,14 +135,6 @@ func TestShift(t *testing.T) {
 		t.Error(err)
 	}
 	if err := expect(slcAfter, []string{"enqueued"}); err != nil {
-		t.Error(err)
-	}
-}
-
-func TestCompact(t *testing.T) {
-	slc1 := []string{"Gooo", "", "", "", "", "", "", "", "", "", "", "d", "mor", "", "ning", "Vietnam!"}
-	slc2 := []string{"Gooo", "d", "mor", "ning", "Vietnam!"}
-	if err := expect(Compact(slc1), slc2); err != nil {
 		t.Error(err)
 	}
 }
