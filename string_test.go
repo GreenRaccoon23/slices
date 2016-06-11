@@ -7,7 +7,7 @@ import (
 )
 
 // https://golang.org/cmd/go/#hdr-Description_of_testing_flags
-// go test -v -bench string_test.go -benchtime 2s
+// go test -v string* -bench '.' -benchtime 2s
 
 var ()
 
@@ -149,6 +149,29 @@ func BenchmarkQueueUnshiftPop(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		slc = append([]string{"next"}, slc...)
 		slc = slc[:iEnd]
+	}
+}
+
+// Ridiculously faster
+func BenchmarkStackPushPop(b *testing.B) {
+
+	slc := []string{"tail", "of", "the", "frog", "on", "the", "bump", "on", "this", "log", "that", "I", "found", "in", "the", "hole", "in", "the", "bottom", "of", "the", "sea"}
+	iEnd := len(slc) - 1
+
+	for i := 0; i < b.N; i++ {
+		slc = append(slc, "snail on the")
+		slc = slc[:iEnd]
+	}
+}
+
+// Ridiculously slower
+func BenchmarkStackUnshiftShift(b *testing.B) {
+
+	slc := []string{"tail", "of", "the", "frog", "on", "the", "bump", "on", "this", "log", "that", "I", "found", "in", "the", "hole", "in", "the", "bottom", "of", "the", "sea"}
+
+	for i := 0; i < b.N; i++ {
+		slc = append([]string{"snail on the"}, slc...)
+		slc = slc[1:]
 	}
 }
 
