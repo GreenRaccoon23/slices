@@ -65,6 +65,10 @@ func TestCut(t *testing.T) {
 	if err := expectNot(Cut([]string{}, 0, -1), []string{""}); err != nil {
 		t.Error(err)
 	}
+
+	if err := expect(Cut([]string{""}, 0, -1), []string{""}); err != nil {
+		t.Error(err)
+	}
 }
 
 // func BenchmarkStringsReplaceAll(b *testing.B) {
