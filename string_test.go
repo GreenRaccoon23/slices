@@ -95,22 +95,22 @@ func expect(args ...interface{}) error {
 	case 0, 1:
 		return fmt.Errorf("Not enough arguments to expect. Args passed: %v", args)
 	case 2:
-		return _expectBasic(args[0], args[1])
+		return _expectBasic(true, args[0], args[1])
 	default:
-		return _expectLabelled(args[0], args[1], args[2])
+		return _expectLabelled(true, args[0], args[1], args[2])
 	}
 }
 
-func _expectBasic(result interface{}, expected interface{}) error {
-	if !_areEqual(result, expected) {
-		return errExpected(result, expected)
+func _expectBasic(boolWanted bool, args ...interface{}) error {
+	if boolReceived := _areEqual(args[0], args[1]); boolReceived != boolWanted {
+		return errExpected(args[0], args[1])
 	}
 	return nil
 }
 
-func _expectLabelled(result interface{}, expected interface{}, label interface{}) error {
-	if !_areEqual(result, expected) {
-		return errExpected(label, result, expected)
+func _expectLabelled(boolWanted bool, args ...interface{}) error {
+	if !_areEqual(args[0], args[1]) {
+		return errExpected(args[2], args[0], args[1])
 	}
 	return nil
 }
