@@ -94,23 +94,14 @@ func expect(args ...interface{}) error {
 	switch len(args) {
 	case 0, 1:
 		return fmt.Errorf("Not enough arguments to expect. Args passed: %v", args)
-	case 2:
-		return _expectBasic(true, args[0], args[1])
 	default:
-		return _expectLabelled(true, args[0], args[1], args[2])
+		return _expect(true, args...)
 	}
 }
 
-func _expectBasic(boolWanted bool, args ...interface{}) error {
+func _expect(boolWanted bool, args ...interface{}) error {
 	if boolReceived := _areEqual(args[0], args[1]); boolReceived != boolWanted {
-		return errExpected(args[0], args[1])
-	}
-	return nil
-}
-
-func _expectLabelled(boolWanted bool, args ...interface{}) error {
-	if !_areEqual(args[0], args[1]) {
-		return errExpected(args[0], args[1], args[2])
+		return errExpected(args...)
 	}
 	return nil
 }
