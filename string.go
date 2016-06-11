@@ -48,7 +48,6 @@ func Equals(slc1 []string, slc2 []string) bool {
 }
 
 // Return true if both slices point to the same array.
-// Probably not useful.
 func IsSameArray(slc1 []string, slc2 []string) bool {
 	return &slc1 == &slc2
 }
@@ -145,6 +144,23 @@ func Filter(unfiltered []string, unwanted ...string) (filtered []string) {
 	return
 }
 
+// Get elements from a slice.
+// Return a new slice of the elements pulled from the original.
+// Only get elements if the slice contains them.
+func Extract(excess []string, wanted ...string) (extracted []string) {
+
+	lenExcess := len(excess)
+	for i := 0; i < lenExcess; i++ {
+		s := excess[i]
+
+		if isWanted := Contains(wanted, s); isWanted {
+			extracted = append(extracted, s)
+		}
+	}
+
+	return
+}
+
 // Add elements to a slice. Return the modified slice.
 func Push(slc []string, args ...string) []string {
 	return append(slc, args...)
@@ -173,18 +189,4 @@ func Unshift(slc []string, s string) []string {
 // Return the removed element along with the modified slice.
 func Shift(slc []string) (string, []string) {
 	return slc[0], slc[1:]
-}
-
-func extract(excess []string, wanted ...string) (extracted []string) {
-
-	lenExcess := len(excess)
-	for i := 0; i < lenExcess; i++ {
-		s := excess[i]
-
-		if isWanted := Contains(wanted, s); isWanted {
-			extracted = append(extracted, s)
-		}
-	}
-
-	return
 }

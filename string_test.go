@@ -109,6 +109,22 @@ func TestFilter(t *testing.T) {
 	}
 }
 
+func TestExtract(t *testing.T) {
+
+	slc := []string{"Peter", "Lois", "Chris", "Stewie", "Brian"}
+	// slc := []string{"Peter", "Lois", "Chris", "Stewie", "Brian", "Meg"}
+
+	result := Extract(slc, "Peter", "Stewie", "Meg")
+	expected := []string{"Peter", "Stewie"}
+
+	if err := expect(result, expected); err != nil {
+		t.Error(err)
+	}
+	if shutUpMeg := Contains(result, "Meg"); shutUpMeg {
+		t.Error(errExpected(false, result, expected, "Shut up, Meg"))
+	}
+}
+
 func TestPush(t *testing.T) {
 	if err := expect(Push([]string{"not enough"}, "just right"), []string{"not enough", "just right"}); err != nil {
 		t.Error(err)
