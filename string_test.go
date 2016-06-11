@@ -93,8 +93,11 @@ func TestDuplicate(t *testing.T) {
 
 func expect(args ...interface{}) error {
 	switch len(args) {
-	case 0, 1:
+	case 0:
 		return fmt.Errorf("Not enough arguments to expect. Args passed: %v", args)
+	case 1:
+		args = append(args, []interface{}{true}...) // this is nuts, Go
+		fallthrough
 	default:
 		return _expect(true, args...)
 	}
@@ -102,8 +105,11 @@ func expect(args ...interface{}) error {
 
 func expectNot(args ...interface{}) error {
 	switch len(args) {
-	case 0, 1:
+	case 0:
 		return fmt.Errorf("Not enough arguments to expect. Args passed: %v", args)
+	case 1:
+		args = append(args, []interface{}{false}...) // this is nuts, Go
+		fallthrough
 	default:
 		return _expect(false, args...)
 	}
