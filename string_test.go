@@ -93,7 +93,7 @@ func TestCut(t *testing.T) {
 func expect(args ...interface{}) error {
 	switch len(args) {
 	case 0, 1:
-		return fmt.Errorf("Not enough arguments to _expect. Args passed: %v", args)
+		return fmt.Errorf("Not enough arguments to expect. Args passed: %v", args)
 	case 2:
 		return _expectBasic(args[0], args[1])
 	default:
@@ -103,14 +103,14 @@ func expect(args ...interface{}) error {
 
 func _expectBasic(result interface{}, expected interface{}) error {
 	if !_areEqual(result, expected) {
-		return fmt.Errorf("Expected '%v' to equal '%v'", result, expected)
+		return errExpected(result, expected)
 	}
 	return nil
 }
 
 func _expectLabelled(result interface{}, expected interface{}, label interface{}) error {
 	if !_areEqual(result, expected) {
-		return fmt.Errorf("%v: Expected '%v' to equal '%v'", label, result, expected)
+		return errExpected(label, result, expected)
 	}
 	return nil
 }
