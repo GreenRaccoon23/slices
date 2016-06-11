@@ -152,6 +152,18 @@ func BenchmarkQueueUnshiftPop(b *testing.B) {
 	}
 }
 
+func TestContains(t *testing.T) {
+
+	if err := expectNot(Contains([]string{"the", "Griffin", "family"}, "Meg")); err != nil {
+		t.Error(err)
+	}
+
+	slc := []string{"a", "snail", "on", "the", "tail", "of", "the", "frog", "on", "the", "bump", "on", "this", "log", "that", "I", "found", "in", "the", "hole", "in", "the", "bottom", "of", "the", "sea"}
+	if err := expect(Contains(slc, "snail")); err != nil {
+		t.Error(err)
+	}
+}
+
 func expect(args ...interface{}) error {
 	switch len(args) {
 	case 0:

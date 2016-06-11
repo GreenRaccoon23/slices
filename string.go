@@ -116,15 +116,21 @@ func Pop(slc []string) (string, []string) {
 	return popped, cut
 }
 
+// Remove the first element of a slice.
+// Return the removed element along with the modified slice.
 func Shift(slc []string) (string, []string) {
 	return slc[0], slc[1:]
 }
 
+// Insert an element at the beginning of a slice,
+// and move all the rest of the elements up an index.
+// Return the modified slice.
 func Unshift(slc []string, s string) []string {
 	return append([]string{s}, slc...)
 }
 
-func slcContains(slc []string, s string) bool {
+// Return true if any element in a slice matches a string.
+func Contains(slc []string, s string) bool {
 	lenSlc := len(slc)
 	for i := 0; i < lenSlc; i++ {
 		if slc[i] == s {
@@ -132,16 +138,6 @@ func slcContains(slc []string, s string) bool {
 		}
 	}
 	return false
-}
-
-func slcIsEmpty(slc []string) bool {
-	lenSlc := len(slc)
-	for i := 0; i < lenSlc; i++ {
-		if slc[i] != "" {
-			return false
-		}
-	}
-	return true
 }
 
 func compact(args ...string) (compacted []string) {
@@ -170,7 +166,7 @@ func filter(unfiltered []string, unwanted ...string) (filtered []string) {
 	for i := 0; i < lenUnfiltered; i++ {
 		s := unfiltered[i]
 
-		if isUnwanted := slcContains(unwanted, s); isUnwanted {
+		if isUnwanted := Contains(unwanted, s); isUnwanted {
 			continue
 		}
 
@@ -186,7 +182,7 @@ func extract(excess []string, wanted ...string) (extracted []string) {
 	for i := 0; i < lenExcess; i++ {
 		s := excess[i]
 
-		if isWanted := slcContains(wanted, s); isWanted {
+		if isWanted := Contains(wanted, s); isWanted {
 			extracted = append(extracted, s)
 		}
 	}
