@@ -123,6 +123,12 @@ func TestShift(t *testing.T) {
 	}
 }
 
+func TestUnshift(t *testing.T) {
+	if err := expect(Unshift([]string{"queue"}, "enqueued"), []string{"enqueued", "queue"}); err != nil {
+		t.Error(err)
+	}
+}
+
 // func BenchmarkStringsReplaceAll(b *testing.B) {
 // 	for i := 0; i < b.N; i++ {
 // 		strings.Replace(TestFileContent, ToFind, ToReplace, -1)

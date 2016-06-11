@@ -120,11 +120,9 @@ func Shift(slc []string) (string, []string) {
 	return slc[0], slc[1:]
 }
 
-// var Enqueue func(slc []string) (string, []string) = Shift
-
-// func unshift(slc []string, s string) []string {
-// 	return append([]string{s}, slc...)
-// }
+func Unshift(slc []string, s string) []string {
+	return append([]string{s}, slc...)
+}
 
 func slcContains(slc []string, s string) bool {
 	lenSlc := len(slc)
