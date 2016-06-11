@@ -85,6 +85,16 @@ func TestDuplicate(t *testing.T) {
 	}
 }
 
+func TestEquals(t *testing.T) {
+
+	slc1 := []string{"same", "elements"}
+	slc2 := []string{"same", "elements"}
+
+	if err := expect(Equals(slc1, slc2)); err != nil {
+		t.Error(err)
+	}
+}
+
 // func BenchmarkStringsReplaceAll(b *testing.B) {
 // 	for i := 0; i < b.N; i++ {
 // 		strings.Replace(TestFileContent, ToFind, ToReplace, -1)
