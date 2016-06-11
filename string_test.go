@@ -155,7 +155,7 @@ func BenchmarkQueueUnshiftPop(b *testing.B) {
 // Ridiculously faster
 func BenchmarkStackPushPop(b *testing.B) {
 
-	slc := []string{"tail", "of", "the", "frog", "on", "the", "bump", "on", "this", "log", "that", "I", "found", "in", "the", "hole", "in", "the", "bottom", "of", "the", "sea"}
+	slc := []string{"tail", "of", "the", "frog", "on", "the", "bump", "on", "this", "log", "that", "I", "found", "in", "a", "hole", "in", "the", "bottom", "of", "the", "sea"}
 	iEnd := len(slc) - 1
 
 	for i := 0; i < b.N; i++ {
@@ -167,7 +167,7 @@ func BenchmarkStackPushPop(b *testing.B) {
 // Ridiculously slower
 func BenchmarkStackUnshiftShift(b *testing.B) {
 
-	slc := []string{"tail", "of", "the", "frog", "on", "the", "bump", "on", "this", "log", "that", "I", "found", "in", "the", "hole", "in", "the", "bottom", "of", "the", "sea"}
+	slc := []string{"tail", "of", "the", "frog", "on", "the", "bump", "on", "this", "log", "that", "I", "found", "in", "a", "hole", "in", "the", "bottom", "of", "the", "sea"}
 
 	for i := 0; i < b.N; i++ {
 		slc = append([]string{"snail on the"}, slc...)
@@ -181,7 +181,7 @@ func TestContains(t *testing.T) {
 		t.Error(err)
 	}
 
-	slc := []string{"a", "snail", "on", "the", "tail", "of", "the", "frog", "on", "the", "bump", "on", "this", "log", "that", "I", "found", "in", "the", "hole", "in", "the", "bottom", "of", "the", "sea"}
+	slc := []string{"a", "snail", "on", "the", "tail", "of", "the", "frog", "on", "the", "bump", "on", "this", "log", "that", "I", "found", "in", "a", "hole", "in", "the", "bottom", "of", "the", "sea"}
 	if err := expect(Contains(slc, "snail")); err != nil {
 		t.Error(err)
 	}
