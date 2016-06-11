@@ -65,10 +65,6 @@ func TestCut(t *testing.T) {
 	if err := expectNot(Cut([]string{}, 0, -1), []string{""}); err != nil {
 		t.Error(err)
 	}
-
-	if err := expectNot(Cut([]string{""}, 0, -1), []string{""}); err != nil {
-		t.Error(err)
-	}
 }
 
 // func BenchmarkStringsReplaceAll(b *testing.B) {
@@ -101,7 +97,7 @@ func _expect(boolWanted bool, args ...interface{}) error {
 	expected := args[1]
 
 	if boolReceived := _areEqual(result, expected); boolReceived != boolWanted {
-		return _errExpected(boolWanted, args...)
+		return errExpected(boolWanted, args...)
 	}
 	return nil
 }
@@ -110,7 +106,7 @@ func _areEqual(result interface{}, expected interface{}) bool {
 	return reflect.DeepEqual(result, expected)
 }
 
-func _errExpected(boolWanted bool, args ...interface{}) error {
+func errExpected(boolWanted bool, args ...interface{}) error {
 
 	condition := "to equal"
 	if boolWanted == false {
