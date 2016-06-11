@@ -128,7 +128,7 @@ Package slices is a collection of handy methods for string slices.
 
 
 
-<h2 id="Compact">func <a href="/src/target/string.go?s=2725:2776#L110">Compact</a>
+<h2 id="Compact">func <a href="./string.go?s=2725:2776#L110">Compact</a>
 	<a class="permalink" href="#Compact">&#xb6;</a>
 </h2>
 <pre>func Compact(bloated []<a href="/pkg/builtin/#string">string</a>) (compacted []<a href="/pkg/builtin/#string">string</a>)</pre>
@@ -138,7 +138,7 @@ The slice is not modified in place; the original will be unchanged.
 </p>
 
 
-<h2 id="Concat">func <a href="/src/target/string.go?s=1214:1246#L46">Concat</a>
+<h2 id="Concat">func <a href="./string.go?s=1214:1246#L46">Concat</a>
 	<a class="permalink" href="#Concat">&#xb6;</a>
 </h2>
 <pre>func Concat(slc []<a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#string">string</a></pre>
@@ -147,7 +147,7 @@ Concat concatenates/joins all elements of a slice into a single string.
 </p>
 
 
-<h2 id="Contains">func <a href="/src/target/string.go?s=161:203#L1">Contains</a>
+<h2 id="Contains">func <a href="./string.go?s=161:203#L1">Contains</a>
 	<a class="permalink" href="#Contains">&#xb6;</a>
 </h2>
 <pre>func Contains(slc []<a href="/pkg/builtin/#string">string</a>, s <a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#bool">bool</a></pre>
@@ -156,7 +156,7 @@ Return true if any element in a slice matches a string.
 </p>
 
 
-<h2 id="Copy">func <a href="/src/target/string.go?s=2475:2507#L102">Copy</a>
+<h2 id="Copy">func <a href="./string.go?s=2475:2507#L102">Copy</a>
 	<a class="permalink" href="#Copy">&#xb6;</a>
 </h2>
 <pre>func Copy(slc []<a href="/pkg/builtin/#string">string</a>) []<a href="/pkg/builtin/#string">string</a></pre>
@@ -166,7 +166,7 @@ i.e., one which points to a different underlying array.
 </p>
 
 
-<h2 id="Cut">func <a href="/src/target/string.go?s=2139:2191#L87">Cut</a>
+<h2 id="Cut">func <a href="./string.go?s=2139:2191#L87">Cut</a>
 	<a class="permalink" href="#Cut">&#xb6;</a>
 </h2>
 <pre>func Cut(slc []<a href="/pkg/builtin/#string">string</a>, start <a href="/pkg/builtin/#int">int</a>, stop <a href="/pkg/builtin/#int">int</a>) []<a href="/pkg/builtin/#string">string</a></pre>
@@ -179,7 +179,7 @@ If &#39;start&#39; is 0 and &#39;stop&#39; is -1, it generates a new copy of the
 </p>
 
 
-<h2 id="Equals">func <a href="/src/target/string.go?s=705:751#L22">Equals</a>
+<h2 id="Equals">func <a href="./string.go?s=705:751#L22">Equals</a>
 	<a class="permalink" href="#Equals">&#xb6;</a>
 </h2>
 <pre>func Equals(slc1 []<a href="/pkg/builtin/#string">string</a>, slc2 []<a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#bool">bool</a></pre>
@@ -190,7 +190,7 @@ only to hold an equal value.
 </p>
 
 
-<h2 id="Extract">func <a href="/src/target/string.go?s=3599:3667#L143">Extract</a>
+<h2 id="Extract">func <a href="./string.go?s=3599:3667#L143">Extract</a>
 	<a class="permalink" href="#Extract">&#xb6;</a>
 </h2>
 <pre>func Extract(excess []<a href="/pkg/builtin/#string">string</a>, wanted ...<a href="/pkg/builtin/#string">string</a>) (extracted []<a href="/pkg/builtin/#string">string</a>)</pre>
@@ -202,7 +202,7 @@ which the original &#39;excess&#39; slice contains.
 </p>
 
 
-<h2 id="Filter">func <a href="/src/target/string.go?s=3103:3175#L123">Filter</a>
+<h2 id="Filter">func <a href="./string.go?s=3103:3175#L123">Filter</a>
 	<a class="permalink" href="#Filter">&#xb6;</a>
 </h2>
 <pre>func Filter(unfiltered []<a href="/pkg/builtin/#string">string</a>, unwanted ...<a href="/pkg/builtin/#string">string</a>) (filtered []<a href="/pkg/builtin/#string">string</a>)</pre>
@@ -213,7 +213,7 @@ The slice is not modified in place; the original will be unchanged.
 </p>
 
 
-<h2 id="IsEmpty">func <a href="/src/target/string.go?s=395:426#L9">IsEmpty</a>
+<h2 id="IsEmpty">func <a href="./string.go?s=395:426#L9">IsEmpty</a>
 	<a class="permalink" href="#IsEmpty">&#xb6;</a>
 </h2>
 <pre>func IsEmpty(slc []<a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#bool">bool</a></pre>
@@ -223,7 +223,7 @@ or is full of empty strings.
 </p>
 
 
-<h2 id="IsSameArray">func <a href="/src/target/string.go?s=1059:1110#L41">IsSameArray</a>
+<h2 id="IsSameArray">func <a href="./string.go?s=1059:1110#L41">IsSameArray</a>
 	<a class="permalink" href="#IsSameArray">&#xb6;</a>
 </h2>
 <pre>func IsSameArray(slc1 []<a href="/pkg/builtin/#string">string</a>, slc2 []<a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#bool">bool</a></pre>
@@ -232,7 +232,7 @@ IsSameArray tests whether two slices point to the same array.
 </p>
 
 
-<h2 id="Join">func <a href="/src/target/string.go?s=1521:1562#L61">Join</a>
+<h2 id="Join">func <a href="./string.go?s=1521:1562#L61">Join</a>
 	<a class="permalink" href="#Join">&#xb6;</a>
 </h2>
 <pre>func Join(slc []<a href="/pkg/builtin/#string">string</a>, by <a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#string">string</a></pre>
@@ -242,7 +242,7 @@ and inserts a common string between each joined element.
 </p>
 
 
-<h2 id="Pop">func <a href="/src/target/string.go?s=4236:4277#L166">Pop</a>
+<h2 id="Pop">func <a href="./string.go?s=4236:4277#L166">Pop</a>
 	<a class="permalink" href="#Pop">&#xb6;</a>
 </h2>
 <pre>func Pop(slc []<a href="/pkg/builtin/#string">string</a>) (<a href="/pkg/builtin/#string">string</a>, []<a href="/pkg/builtin/#string">string</a>)</pre>
@@ -252,7 +252,7 @@ It return the removed element along with the modified slice.
 </p>
 
 
-<h2 id="Push">func <a href="/src/target/string.go?s=4045:4093#L160">Push</a>
+<h2 id="Push">func <a href="./string.go?s=4045:4093#L160">Push</a>
 	<a class="permalink" href="#Push">&#xb6;</a>
 </h2>
 <pre>func Push(slc []<a href="/pkg/builtin/#string">string</a>, args ...<a href="/pkg/builtin/#string">string</a>) []<a href="/pkg/builtin/#string">string</a></pre>
@@ -263,7 +263,7 @@ It is meant to be clear, readable method for stack implementations.
 </p>
 
 
-<h2 id="Shift">func <a href="/src/target/string.go?s=4755:4798#L186">Shift</a>
+<h2 id="Shift">func <a href="./string.go?s=4755:4798#L186">Shift</a>
 	<a class="permalink" href="#Shift">&#xb6;</a>
 </h2>
 <pre>func Shift(slc []<a href="/pkg/builtin/#string">string</a>) (<a href="/pkg/builtin/#string">string</a>, []<a href="/pkg/builtin/#string">string</a>)</pre>
@@ -273,7 +273,7 @@ It returns the removed element along with the modified slice.
 </p>
 
 
-<h2 id="Unshift">func <a href="/src/target/string.go?s=4556:4601#L180">Unshift</a>
+<h2 id="Unshift">func <a href="./string.go?s=4556:4601#L180">Unshift</a>
 	<a class="permalink" href="#Unshift">&#xb6;</a>
 </h2>
 <pre>func Unshift(slc []<a href="/pkg/builtin/#string">string</a>, s <a href="/pkg/builtin/#string">string</a>) []<a href="/pkg/builtin/#string">string</a></pre>
