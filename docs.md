@@ -123,7 +123,7 @@ Package slices is a collection of handy methods for string slices.
 <!-- Zero means show all package entry points. -->
 <ul style="margin-left: 0.5in" id="callgraph-0" class="treeview"></ul>
 </div>
-</div><!-- #pkg-callgraph -->
+</div>
 
 
 
