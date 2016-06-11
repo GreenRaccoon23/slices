@@ -3,7 +3,7 @@ package slices
 
 import "bytes"
 
-// Return true if any element in a slice matches a string.
+// Contains tests whether any element in a slice matches a string.
 func Contains(slc []string, s string) bool {
 	lenSlc := len(slc)
 	for i := 0; i < lenSlc; i++ {
