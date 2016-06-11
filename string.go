@@ -1,3 +1,4 @@
+// Package slices is a collection of handy methods for string slices.
 package slices
 
 import "bytes"
@@ -13,8 +14,8 @@ func Contains(slc []string, s string) bool {
 	return false
 }
 
-// Return true if a slice contains 0 elements
-// or if all elements in a slice have lengths of 0.
+// IsEmpty tests whether a slice has 0 elements
+// or is full of empty strings.
 func IsEmpty(slc []string) bool {
 	lenSlc := len(slc)
 	for i := 0; i < lenSlc; i++ {
@@ -25,10 +26,9 @@ func IsEmpty(slc []string) bool {
 	return true
 }
 
-// Return true if the elements of both slices have equal values.
-// In order for elements to equal each other,
-// they do NOT need to point to the same memory location;
-// they only need to hold an equal value.
+// Equals tests whether all the elements of two slices are equal.
+// These elements do NOT need to point to the same memory location,
+// only to hold an equal value.
 func Equals(slc1 []string, slc2 []string) bool {
 
 	lenSlc1 := len(slc1)
@@ -40,19 +40,19 @@ func Equals(slc1 []string, slc2 []string) bool {
 
 	iMax := lenSlc1
 	for i := 0; i < iMax; i++ {
-		if slc1[i] != slc2[i] {
+		if slc1[i] != slc2[i] { //todo: goroutine for unsorted slices?
 			return false
 		}
 	}
 	return true
 }
 
-// Return true if both slices point to the same array.
+// IsSameArray tests whether two slices point to the same array.
 func IsSameArray(slc1 []string, slc2 []string) bool {
 	return &slc1 == &slc2
 }
 
-// Concatenate/Join all elements of a slice into a single string.
+// Concat concatenates/joins all elements of a slice into a single string.
 func Concat(slc []string) string {
 
 	var b bytes.Buffer
@@ -66,8 +66,8 @@ func Concat(slc []string) string {
 	return b.String()
 }
 
-// Concatenate/Join all elements of a slice into a single string.
-// Separate each element by a provided string.
+// Join concatenates/joins all elements of a slice into a single string
+// and inserts a common string between each joined element.
 func Join(slc []string, by string) string {
 
 	lenSlc := len(slc)
@@ -89,10 +89,11 @@ func Join(slc []string, by string) string {
 	return b.String()
 }
 
-// Get a slice of a slice.
-// Get the elements of a slice from index 'start' to index 'stop'.
-// 'start' is inclusive (include the element at that index).
-// 'stop' is exclusive (do not include the element at that index).
+// Cut gets a slice of a slice.
+// It gets the elements of a slice from index 'start' to index 'stop'.
+// 'start' is inclusive (will include the element at that index).
+// 'stop' is exclusive (will not include the element at that index).
+// If 'start' is 0 and 'stop' is -1, it generates a new copy of the slice.
 func Cut(slc []string, start int, stop int) []string {
 
 	if copyRequested := (start == 0 && stop == -1); copyRequested {
@@ -106,14 +107,15 @@ func Cut(slc []string, start int, stop int) []string {
 	return slc[start:stop]
 }
 
-// Return a copy of a slice (different underlying array).
+// Copy generates a full copy of a slice,
+// i.e., one which points to a different underlying array.
 func Copy(slc []string) []string {
 	newSlc := make([]string, len(slc))
 	copy(newSlc, slc)
 	return newSlc
 }
 
-// Return a copy of a slice with any empty strings removed.
+// Compact generates a copy of a slice with any empty strings removed.
 // The slice is not modified in place; the original will be unchanged.
 func Compact(bloated []string) (compacted []string) {
 	lenBloated := len(bloated)
@@ -125,8 +127,8 @@ func Compact(bloated []string) (compacted []string) {
 	return
 }
 
-// Remove elements from a slice.
-// Return a copy of a slice with unwanted strings removed.
+// Filter removes elements from a slice.
+// It returns a copy of a slice with unwanted strings removed.
 // The slice is not modified in place; the original will be unchanged.
 func Filter(unfiltered []string, unwanted ...string) (filtered []string) {
 
@@ -144,9 +146,10 @@ func Filter(unfiltered []string, unwanted ...string) (filtered []string) {
 	return
 }
 
-// Get elements from a slice.
-// Return a new slice of the elements pulled from the original.
-// Only get elements if the slice contains them.
+// Extract gets elements from a slice.
+// It return a new slice of the elements pulled from the original.
+// The new slice contains only the 'wanted' elements
+// which the original 'excess' slice contains.
 func Extract(excess []string, wanted ...string) (extracted []string) {
 
 	lenExcess := len(excess)
@@ -161,13 +164,15 @@ func Extract(excess []string, wanted ...string) (extracted []string) {
 	return
 }
 
-// Add elements to a slice. Return the modified slice.
+// Push adds elements to a slice and returns the modified slice.
+// It is a direct call to the built-in 'append()' func.
+// It is meant to be clear, readable method for stack implementations.
 func Push(slc []string, args ...string) []string {
 	return append(slc, args...)
 }
 
-// Remove the last element of a slice.
-// Return the removed element along with the modified slice.
+// Pop removes the last element of a slice.
+// It return the removed element along with the modified slice.
 func Pop(slc []string) (string, []string) {
 
 	iEnd := len(slc) - 1
@@ -178,15 +183,16 @@ func Pop(slc []string) (string, []string) {
 	return popped, cut
 }
 
-// Insert an element at the beginning of a slice,
-// and move all the rest of the elements up an index.
-// Return the modified slice.
+// Unshift inserts an element at the beginning of a slice,
+// and moves the rest of the elements up an index.
+// It does not overwrite the first element.
+// It returns the modified slice.
 func Unshift(slc []string, s string) []string {
 	return append([]string{s}, slc...)
 }
 
-// Remove the first element of a slice.
-// Return the removed element along with the modified slice.
+// Shift removes the first element of a slice.
+// It returns the removed element along with the modified slice.
 func Shift(slc []string) (string, []string) {
 	return slc[0], slc[1:]
 }
