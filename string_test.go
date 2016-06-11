@@ -62,7 +62,7 @@ func TestCut(t *testing.T) {
 		t.Error(err)
 	}
 
-	if err := expect(Cut([]string{}, 0, -1), []string{""}); err != nil {
+	if err := expectNot(Cut([]string{}, 0, -1), []string{""}); err != nil {
 		t.Error(err)
 	}
 
@@ -87,6 +87,15 @@ func expect(args ...interface{}) error {
 		return fmt.Errorf("Not enough arguments to expect. Args passed: %v", args)
 	default:
 		return _expect(true, args...)
+	}
+}
+
+func expectNot(args ...interface{}) error {
+	switch len(args) {
+	case 0, 1:
+		return fmt.Errorf("Not enough arguments to expect. Args passed: %v", args)
+	default:
+		return _expect(false, args...)
 	}
 }
 
