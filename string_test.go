@@ -109,6 +109,20 @@ func TestPop(t *testing.T) {
 	}
 }
 
+func TestShift(t *testing.T) {
+
+	slcBefore := []string{"next", "enqueued"}
+	shifted, slcAfter := Shift(slcBefore)
+
+	if err := expect(shifted, "next"); err != nil {
+		t.Error(err)
+	}
+
+	if err := expect(slcAfter, []string{"enqueued"}); err != nil {
+		t.Error(err)
+	}
+}
+
 // func BenchmarkStringsReplaceAll(b *testing.B) {
 // 	for i := 0; i < b.N; i++ {
 // 		strings.Replace(TestFileContent, ToFind, ToReplace, -1)

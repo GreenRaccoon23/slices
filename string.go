@@ -116,9 +116,11 @@ func Pop(slc []string) (string, []string) {
 	return popped, cut
 }
 
-// func shift(slc []string) (string, []string) {
-// 	return slc[0], slc[1:]
-// }
+func Shift(slc []string) (string, []string) {
+	return slc[0], slc[1:]
+}
+
+// var Enqueue func(slc []string) (string, []string) = Shift
 
 // func unshift(slc []string, s string) []string {
 // 	return append([]string{s}, slc...)
