@@ -100,7 +100,11 @@ func expect(args ...interface{}) error {
 }
 
 func _expect(boolWanted bool, args ...interface{}) error {
-	if boolReceived := _areEqual(args[0], args[1]); boolReceived != boolWanted {
+
+	result := args[0]
+	expected := args[1]
+
+	if boolReceived := _areEqual(result, expected); boolReceived != boolWanted {
 		return errExpected(args...)
 	}
 	return nil
