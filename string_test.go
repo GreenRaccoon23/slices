@@ -10,7 +10,10 @@ import (
 // go test -v string*
 // go test -v string* -bench '.' -benchtime 2s
 
-var ()
+var (
+	DoFailAll bool = false
+	// DoFailAll bool = true
+)
 
 func TestContains(t *testing.T) {
 	if err := expectNot(Contains([]string{"the", "Griffin", "family"}, "Meg")); err != nil {
@@ -112,7 +115,9 @@ func TestFilter(t *testing.T) {
 func TestExtract(t *testing.T) {
 
 	slc := []string{"Peter", "Lois", "Chris", "Stewie", "Brian"}
-	// slc := []string{"Peter", "Lois", "Chris", "Stewie", "Brian", "Meg"}
+	if DoFailAll {
+		slc = []string{"Peter", "Lois", "Chris", "Stewie", "Brian", "Meg"}
+	}
 
 	result := Extract(slc, "Peter", "Stewie", "Meg")
 	expected := []string{"Peter", "Stewie"}
@@ -185,13 +190,13 @@ func expectNot(args ...interface{}) error {
 	}
 }
 
-func _expect(boolWanted bool, args ...interface{}) error {
+func _expect(boolExpected bool, args ...interface{}) error {
 
 	result := args[0]
 	expected := args[1]
 
-	if boolReceived := _areEqual(result, expected); boolReceived != boolWanted {
-		return errExpected(boolWanted, args...)
+	if boolReceived := _areEqual(result, expected); boolReceived != boolExpected || DoFailAll {
+		return errExpected(boolExpected, args...)
 	}
 	return nil
 }
@@ -200,11 +205,11 @@ func _areEqual(result interface{}, expected interface{}) bool {
 	return reflect.DeepEqual(result, expected)
 }
 
-func errExpected(boolWanted bool, args ...interface{}) error {
+func errExpected(boolExpected bool, args ...interface{}) error {
 
-	condition := "to equal"
-	if boolWanted == false {
-		condition = "not to equal"
+	conditionExpected := "to equal"
+	if boolExpected == false {
+		conditionExpected = "not to equal"
 	}
 
 	result := args[0]
@@ -212,9 +217,9 @@ func errExpected(boolWanted bool, args ...interface{}) error {
 
 	switch len(args) {
 	case 2:
-		return fmt.Errorf("Expected '%v' %v '%v'", result, condition, expected)
+		return fmt.Errorf("Expected '%v' %v '%v'", result, conditionExpected, expected)
 	default:
-		return fmt.Errorf("%v: Expected '%v' %v '%v'", args[2], result, condition, expected)
+		return fmt.Errorf("%v: Expected '%v' %v '%v'", args[2], result, conditionExpected, expected)
 	}
 }
 
