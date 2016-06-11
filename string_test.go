@@ -149,8 +149,82 @@ func TestUnshift(t *testing.T) {
 	}
 }
 
+var (
+	DoBenchmarkQueueStack bool = true
+	// DoBenchmarkQueueStack bool = false
+)
+
 // Ridiculously faster
 func BenchmarkQueuePushShift(b *testing.B) {
+
+	if !DoBenchmarkQueueStack {
+		return
+	}
+
+	slc := []string{"deeporange50", "deeporange500", "deeporange900", "deeporangeA100", "deeporangeA200", "deeporangeA400", "deeporangea700", "deeporange-50", "deeporange:500", "deeporange_900", "deeporange A100", "deeporange-A200", "deeporange:A400", "deeporange_A700", "deeporange000", "deeporange1000", "deeporangeA000", "deeporangeA300", "deeporangeA1000", "deeporange:000", "deeporange-1000", "deeporange_A000", "deeporange A300", "deeporange-A1000", "deeporange"}
+
+	for i := 0; i < b.N; i++ {
+		slc = Push(slc, "next")
+		_, slc = Shift(slc)
+	}
+}
+
+// Ridiculously slower
+func BenchmarkQueueUnshiftPop(b *testing.B) {
+
+	if !DoBenchmarkQueueStack {
+		return
+	}
+
+	slc := []string{"deeporange50", "deeporange500", "deeporange900", "deeporangeA100", "deeporangeA200", "deeporangeA400", "deeporangea700", "deeporange-50", "deeporange:500", "deeporange_900", "deeporange A100", "deeporange-A200", "deeporange:A400", "deeporange_A700", "deeporange000", "deeporange1000", "deeporangeA000", "deeporangeA300", "deeporangeA1000", "deeporange:000", "deeporange-1000", "deeporange_A000", "deeporange A300", "deeporange-A1000", "deeporange"}
+
+	for i := 0; i < b.N; i++ {
+		slc = Unshift(slc, "next")
+		_, slc = Pop(slc)
+	}
+}
+
+// Ridiculously faster
+func BenchmarkStackPushPop(b *testing.B) {
+
+	if !DoBenchmarkQueueStack {
+		return
+	}
+
+	slc := []string{"tail", "of", "the", "frog", "on", "the", "bump", "on", "this", "log", "that", "I", "found", "in", "a", "hole", "in", "the", "bottom", "of", "the", "sea"}
+
+	for i := 0; i < b.N; i++ {
+		slc = Push(slc, "snail on the")
+		_, slc = Pop(slc)
+	}
+}
+
+// Ridiculously slower
+func BenchmarkStackUnshiftShift(b *testing.B) {
+
+	if !DoBenchmarkQueueStack {
+		return
+	}
+
+	slc := []string{"tail", "of", "the", "frog", "on", "the", "bump", "on", "this", "log", "that", "I", "found", "in", "a", "hole", "in", "the", "bottom", "of", "the", "sea"}
+
+	for i := 0; i < b.N; i++ {
+		slc = Unshift(slc, "snail on the")
+		_, slc = Shift(slc)
+	}
+}
+
+var (
+	DoBenchmarkQueueStackNative bool = true
+	// DoBenchmarkQueueStackNative bool = false
+)
+
+// Ridiculously faster
+func BenchmarkQueuePushShiftNative(b *testing.B) {
+
+	if !DoBenchmarkQueueStackNative {
+		return
+	}
 
 	slc := []string{"deeporange50", "deeporange500", "deeporange900", "deeporangeA100", "deeporangeA200", "deeporangeA400", "deeporangea700", "deeporange-50", "deeporange:500", "deeporange_900", "deeporange A100", "deeporange-A200", "deeporange:A400", "deeporange_A700", "deeporange000", "deeporange1000", "deeporangeA000", "deeporangeA300", "deeporangeA1000", "deeporange:000", "deeporange-1000", "deeporange_A000", "deeporange A300", "deeporange-A1000", "deeporange"}
 
@@ -161,7 +235,11 @@ func BenchmarkQueuePushShift(b *testing.B) {
 }
 
 // Ridiculously slower
-func BenchmarkQueueUnshiftPop(b *testing.B) {
+func BenchmarkQueueUnshiftPopNative(b *testing.B) {
+
+	if !DoBenchmarkQueueStackNative {
+		return
+	}
 
 	slc := []string{"deeporange50", "deeporange500", "deeporange900", "deeporangeA100", "deeporangeA200", "deeporangeA400", "deeporangea700", "deeporange-50", "deeporange:500", "deeporange_900", "deeporange A100", "deeporange-A200", "deeporange:A400", "deeporange_A700", "deeporange000", "deeporange1000", "deeporangeA000", "deeporangeA300", "deeporangeA1000", "deeporange:000", "deeporange-1000", "deeporange_A000", "deeporange A300", "deeporange-A1000", "deeporange"}
 	iEnd := len(slc) - 1
@@ -173,7 +251,11 @@ func BenchmarkQueueUnshiftPop(b *testing.B) {
 }
 
 // Ridiculously faster
-func BenchmarkStackPushPop(b *testing.B) {
+func BenchmarkStackPushPopNative(b *testing.B) {
+
+	if !DoBenchmarkQueueStackNative {
+		return
+	}
 
 	slc := []string{"tail", "of", "the", "frog", "on", "the", "bump", "on", "this", "log", "that", "I", "found", "in", "a", "hole", "in", "the", "bottom", "of", "the", "sea"}
 	iEnd := len(slc) - 1
@@ -185,7 +267,11 @@ func BenchmarkStackPushPop(b *testing.B) {
 }
 
 // Ridiculously slower
-func BenchmarkStackUnshiftShift(b *testing.B) {
+func BenchmarkStackUnshiftShiftNative(b *testing.B) {
+
+	if !DoBenchmarkQueueStackNative {
+		return
+	}
 
 	slc := []string{"tail", "of", "the", "frog", "on", "the", "bump", "on", "this", "log", "that", "I", "found", "in", "a", "hole", "in", "the", "bottom", "of", "the", "sea"}
 
