@@ -133,6 +133,14 @@ func TestShift(t *testing.T) {
 	}
 }
 
+func TestCompact(t *testing.T) {
+	slc1 := []string{"Gooo", "", "", "", "", "", "", "", "", "", "", "d", "mor", "", "ning", "Vietnam!"}
+	slc2 := []string{"Gooo", "d", "mor", "ning", "Vietnam!"}
+	if err := expect(Compact(slc1), slc2); err != nil {
+		t.Error(err)
+	}
+}
+
 func expect(args ...interface{}) error {
 	switch len(args) {
 	case 0:

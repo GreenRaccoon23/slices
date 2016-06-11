@@ -114,6 +114,19 @@ func Copy(slc []string) []string {
 	return newSlc
 }
 
+// Return a copy of a slice with any empty strings removed.
+// The slice is not modified in place; the original will be unchanged.
+func Compact(bloated []string) (compacted []string) {
+	lenBloated := len(bloated)
+	for i := 0; i < lenBloated; i++ {
+		if s := bloated[i]; s != "" {
+			compacted = append(compacted, s)
+		}
+	}
+	return
+}
+
+// Add elements to a slice. Return the modified slice.
 func Push(slc []string, args ...string) []string {
 	return append(slc, args...)
 }
