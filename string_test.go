@@ -80,7 +80,7 @@ func TestIsSameArray(t *testing.T) {
 
 func TestDuplicate(t *testing.T) {
 	slc1 := []string{"same elements,", "different arrays"}
-	if slc2 := Duplicate(slc1); IsSameArray(slc2, slc1) {
+	if slc2 := Copy(slc1); IsSameArray(slc2, slc1) {
 		t.Error(errExpected(false, slc2, slc1))
 	}
 }

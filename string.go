@@ -87,7 +87,7 @@ func Join(slc []string, by string) string {
 func Cut(slc []string, iBeg int, iEnd int) []string {
 
 	if copyRequested := (iBeg == 0 && iEnd == -1); copyRequested {
-		return Duplicate(slc)
+		return Copy(slc)
 	}
 
 	if goToEnd := (iEnd == -1); goToEnd {
@@ -100,7 +100,7 @@ func Cut(slc []string, iBeg int, iEnd int) []string {
 // func Cut(slc []string, iBeg int, iEnd int) []string {
 
 // 	if copyAll := (iBeg == 0 && iEnd == -1); copyAll {
-// 		return Duplicate(slc)
+// 		return Copy(slc)
 // 	}
 
 // 	if goToEnd := (iEnd == -1); goToEnd {
@@ -110,7 +110,7 @@ func Cut(slc []string, iBeg int, iEnd int) []string {
 // 	return slc[iBeg:iEnd]
 // }
 
-func Duplicate(slc []string) []string {
+func Copy(slc []string) []string {
 	newSlc := make([]string, len(slc))
 	copy(newSlc, slc)
 	return newSlc
