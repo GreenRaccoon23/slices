@@ -38,22 +38,9 @@ func Equals(slc1 []string, slc2 []string) bool {
 }
 
 // Return true if both slices point to the same array.
+// Probably not useful.
 func IsSameArray(slc1 []string, slc2 []string) bool {
-
-	lenSlc1 := len(slc1)
-	lenSlc2 := len(slc2)
-
-	iMax := lenSlc1
-	if lenSlc2 > lenSlc1 {
-		iMax = lenSlc2
-	}
-
-	for i := 0; i < iMax; i++ {
-		if &slc1[i] != &slc2[i] {
-			return false
-		}
-	}
-	return true
+	return &slc1 == &slc2
 }
 
 // Concatenate/Join all elements of a slice into a single string.
