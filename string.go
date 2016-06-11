@@ -27,8 +27,8 @@ func IsEmpty(slc []string) bool {
 
 // Return true if the elements of both slices have equal values.
 // In order for elements to equal each other,
-//   they do NOT need to point to the same memory location;
-//   they only need to hold an equal value.
+// they do NOT need to point to the same memory location;
+// they only need to hold an equal value.
 func Equals(slc1 []string, slc2 []string) bool {
 
 	lenSlc1 := len(slc1)
@@ -90,20 +90,20 @@ func Join(slc []string, by string) string {
 }
 
 // Get a slice of a slice.
-// Get the elements of a slice from index 'iBeg' to index 'iEnd'.
-// 'iBeg' is inclusive (include the element at that index).
-// 'iEnd' is exclusive (do not include the element at that index).
-func Cut(slc []string, iBeg int, iEnd int) []string {
+// Get the elements of a slice from index 'start' to index 'stop'.
+// 'start' is inclusive (include the element at that index).
+// 'stop' is exclusive (do not include the element at that index).
+func Cut(slc []string, start int, stop int) []string {
 
-	if copyRequested := (iBeg == 0 && iEnd == -1); copyRequested {
+	if copyRequested := (start == 0 && stop == -1); copyRequested {
 		return Copy(slc)
 	}
 
-	if goToEnd := (iEnd == -1); goToEnd {
-		return slc[iBeg:]
+	if goToEnd := (stop == -1); goToEnd {
+		return slc[start:]
 	}
 
-	return slc[iBeg:iEnd]
+	return slc[start:stop]
 }
 
 // Return a copy of a slice (different underlying array).
