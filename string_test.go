@@ -96,13 +96,7 @@ func TestEquals(t *testing.T) {
 }
 
 func TestPush(t *testing.T) {
-
-	slc1 := []string{"not enough"}
-	slc2 := []string{"not enough", "just right"}
-
-	Push(&slc1, "just right")
-
-	if err := expect(slc1, slc2); err != nil {
+	if err := expect(Push([]string{"not enough"}, "just right"), []string{"not enough", "just right"}); err != nil {
 		t.Error(err)
 	}
 }

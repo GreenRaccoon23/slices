@@ -104,8 +104,8 @@ func Copy(slc []string) []string {
 	return newSlc
 }
 
-func Push(slc *[]string, args ...string) {
-	*slc = append(*slc, args...)
+func Push(slc []string, args ...string) []string {
+	return append(slc, args...)
 }
 
 // Remove the last element of a slice.
