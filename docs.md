@@ -1,15 +1,15 @@
 use 'godoc cmd/github.com/GreenRaccoon23/slices' for documentation on the github.com/GreenRaccoon23/slices command 
 
 <!--
-	Copyright 2009 The Go Authors. All rights reserved.
-	Use of this source code is governed by a BSD-style
-	license that can be found in the LICENSE file.
+Copyright 2009 The Go Authors. All rights reserved.
+Use of this source code is governed by a BSD-style
+license that can be found in the LICENSE file.
 -->
 <!--
-	Note: Static (i.e., not template-generated) href and id
-	attributes start with "pkg-" to make it impossible for
-	them to conflict with generated attributes (some of which
-	correspond to Go identifiers).
+Note: Static (i.e., not template-generated) href and id
+attributes start with "pkg-" to make it impossible for
+them to conflict with generated attributes (some of which
+correspond to Go identifiers).
 -->
 
 <script type='text/javascript'>
@@ -32,22 +32,25 @@ document.CALLGRAPH = ;
 </div>
 <!-- The package's Name is printed as title by the top-level template -->
 <div id="pkg-overview" class="toggleVisible">
-<div class="collapsed">
+<!-- <div class="collapsed">
 	<h2 class="toggleButton" title="Click to show Overview section">Overview ▹</h2>
-</div>
+</div> -->
 <div class="expanded">
 	<h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
-	
+	<p>
+Package slices is a collection of handy methods for string slices.
+</p>
+
 </div>
 </div>
 
 
 <div id="pkg-index" class="toggleVisible">
-<div class="collapsed">
-<h2 class="toggleButton" title="Click to show Index section">Index ▹</h2>
-</div>
+<!-- <div class="collapsed">
+    <h2 class="toggleButton" title="Click to show Index section">Index ▹</h2>
+</div> -->
 <div class="expanded">
-<h2 class="toggleButton" title="Click to hide Index section">Index ▾</h2>
+    <h2 class="toggleButton" title="Click to hide Index section">Index ▾</h2>
 
 <!-- Table of contents for API; must be named manual-nav to turn off auto nav. -->
 <div id="manual-nav">
@@ -125,24 +128,26 @@ document.CALLGRAPH = ;
 
 
 
-<h2 id="Compact">func <a href="/src/target/string.go?s=2496:2547#L108">Compact</a>
+<h2 id="Compact">func <a href="/src/target/string.go?s=2725:2776#L110">Compact</a>
 	<a class="permalink" href="#Compact">&#xb6;</a>
 </h2>
 <pre>func Compact(bloated []<a href="/pkg/builtin/#string">string</a>) (compacted []<a href="/pkg/builtin/#string">string</a>)</pre>
 <p>
-Return a copy of a slice with any empty strings removed.
+Compact generates a copy of a slice with any empty strings removed.
 The slice is not modified in place; the original will be unchanged.
 </p>
 
-<h2 id="Concat">func <a href="/src/target/string.go?s=1149:1181#L46">Concat</a>
+
+<h2 id="Concat">func <a href="/src/target/string.go?s=1214:1246#L46">Concat</a>
 	<a class="permalink" href="#Concat">&#xb6;</a>
 </h2>
 <pre>func Concat(slc []<a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#string">string</a></pre>
 <p>
-Concatenate/Join all elements of a slice into a single string.
+Concat concatenates/joins all elements of a slice into a single string.
 </p>
 
-<h2 id="Contains">func <a href="/src/target/string.go?s=91:133#L1">Contains</a>
+
+<h2 id="Contains">func <a href="/src/target/string.go?s=161:203#L1">Contains</a>
 	<a class="permalink" href="#Contains">&#xb6;</a>
 </h2>
 <pre>func Contains(slc []<a href="/pkg/builtin/#string">string</a>, s <a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#bool">bool</a></pre>
@@ -150,114 +155,131 @@ Concatenate/Join all elements of a slice into a single string.
 Return true if any element in a slice matches a string.
 </p>
 
-<h2 id="Copy">func <a href="/src/target/string.go?s=2257:2289#L100">Copy</a>
+
+<h2 id="Copy">func <a href="/src/target/string.go?s=2475:2507#L102">Copy</a>
 	<a class="permalink" href="#Copy">&#xb6;</a>
 </h2>
 <pre>func Copy(slc []<a href="/pkg/builtin/#string">string</a>) []<a href="/pkg/builtin/#string">string</a></pre>
 <p>
-Return a copy of a slice (different underlying array).
+Copy generates a full copy of a slice,
+i.e., one which points to a different underlying array.
 </p>
 
-<h2 id="Cut">func <a href="/src/target/string.go?s=1964:2016#L86">Cut</a>
+
+<h2 id="Cut">func <a href="/src/target/string.go?s=2139:2191#L87">Cut</a>
 	<a class="permalink" href="#Cut">&#xb6;</a>
 </h2>
 <pre>func Cut(slc []<a href="/pkg/builtin/#string">string</a>, start <a href="/pkg/builtin/#int">int</a>, stop <a href="/pkg/builtin/#int">int</a>) []<a href="/pkg/builtin/#string">string</a></pre>
 <p>
-Get a slice of a slice.
-Get the elements of a slice from index &#39;start&#39; to index &#39;stop&#39;.
-&#39;start&#39; is inclusive (include the element at that index).
-&#39;stop&#39; is exclusive (do not include the element at that index).
+Cut gets a slice of a slice.
+It gets the elements of a slice from index &#39;start&#39; to index &#39;stop&#39;.
+&#39;start&#39; is inclusive (will include the element at that index).
+&#39;stop&#39; is exclusive (will not include the element at that index).
+If &#39;start&#39; is 0 and &#39;stop&#39; is -1, it generates a new copy of the slice.
 </p>
 
-<h2 id="Equals">func <a href="/src/target/string.go?s=698:744#L22">Equals</a>
+
+<h2 id="Equals">func <a href="/src/target/string.go?s=705:751#L22">Equals</a>
 	<a class="permalink" href="#Equals">&#xb6;</a>
 </h2>
 <pre>func Equals(slc1 []<a href="/pkg/builtin/#string">string</a>, slc2 []<a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#bool">bool</a></pre>
 <p>
-Return true if the elements of both slices have equal values.
-In order for elements to equal each other,
-they do NOT need to point to the same memory location;
-they only need to hold an equal value.
+Equals tests whether all the elements of two slices are equal.
+These elements do NOT need to point to the same memory location,
+only to hold an equal value.
 </p>
 
-<h2 id="Extract">func <a href="/src/target/string.go?s=3295:3363#L140">Extract</a>
+
+<h2 id="Extract">func <a href="/src/target/string.go?s=3599:3667#L143">Extract</a>
 	<a class="permalink" href="#Extract">&#xb6;</a>
 </h2>
 <pre>func Extract(excess []<a href="/pkg/builtin/#string">string</a>, wanted ...<a href="/pkg/builtin/#string">string</a>) (extracted []<a href="/pkg/builtin/#string">string</a>)</pre>
 <p>
-Get elements from a slice.
-Return a new slice of the elements pulled from the original.
-Only get elements if the slice contains them.
+Extract gets elements from a slice.
+It return a new slice of the elements pulled from the original.
+The new slice contains only the &#39;wanted&#39; elements
+which the original &#39;excess&#39; slice contains.
 </p>
 
-<h2 id="Filter">func <a href="/src/target/string.go?s=2862:2934#L121">Filter</a>
+
+<h2 id="Filter">func <a href="/src/target/string.go?s=3103:3175#L123">Filter</a>
 	<a class="permalink" href="#Filter">&#xb6;</a>
 </h2>
 <pre>func Filter(unfiltered []<a href="/pkg/builtin/#string">string</a>, unwanted ...<a href="/pkg/builtin/#string">string</a>) (filtered []<a href="/pkg/builtin/#string">string</a>)</pre>
 <p>
-Remove elements from a slice.
-Return a copy of a slice with unwanted strings removed.
+Filter removes elements from a slice.
+It returns a copy of a slice with unwanted strings removed.
 The slice is not modified in place; the original will be unchanged.
 </p>
 
-<h2 id="IsEmpty">func <a href="/src/target/string.go?s=343:374#L8">IsEmpty</a>
+
+<h2 id="IsEmpty">func <a href="/src/target/string.go?s=395:426#L9">IsEmpty</a>
 	<a class="permalink" href="#IsEmpty">&#xb6;</a>
 </h2>
 <pre>func IsEmpty(slc []<a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#bool">bool</a></pre>
 <p>
-Return true if a slice contains 0 elements
-or if all elements in a slice have lengths of 0.
+IsEmpty tests whether a slice has 0 elements
+or is full of empty strings.
 </p>
 
-<h2 id="IsSameArray">func <a href="/src/target/string.go?s=1003:1054#L41">IsSameArray</a>
+
+<h2 id="IsSameArray">func <a href="/src/target/string.go?s=1059:1110#L41">IsSameArray</a>
 	<a class="permalink" href="#IsSameArray">&#xb6;</a>
 </h2>
 <pre>func IsSameArray(slc1 []<a href="/pkg/builtin/#string">string</a>, slc2 []<a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#bool">bool</a></pre>
 <p>
-Return true if both slices point to the same array.
+IsSameArray tests whether two slices point to the same array.
 </p>
 
-<h2 id="Join">func <a href="/src/target/string.go?s=1437:1478#L61">Join</a>
+
+<h2 id="Join">func <a href="/src/target/string.go?s=1521:1562#L61">Join</a>
 	<a class="permalink" href="#Join">&#xb6;</a>
 </h2>
 <pre>func Join(slc []<a href="/pkg/builtin/#string">string</a>, by <a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#string">string</a></pre>
 <p>
-Concatenate/Join all elements of a slice into a single string.
-Separate each element by a provided string.
+Join concatenates/joins all elements of a slice into a single string
+and inserts a common string between each joined element.
 </p>
 
-<h2 id="Pop">func <a href="/src/target/string.go?s=3787:3828#L161">Pop</a>
+
+<h2 id="Pop">func <a href="/src/target/string.go?s=4236:4277#L166">Pop</a>
 	<a class="permalink" href="#Pop">&#xb6;</a>
 </h2>
 <pre>func Pop(slc []<a href="/pkg/builtin/#string">string</a>) (<a href="/pkg/builtin/#string">string</a>, []<a href="/pkg/builtin/#string">string</a>)</pre>
 <p>
-Remove the last element of a slice.
-Return the removed element along with the modified slice.
+Pop removes the last element of a slice.
+It return the removed element along with the modified slice.
 </p>
 
-<h2 id="Push">func <a href="/src/target/string.go?s=3604:3652#L155">Push</a>
+
+<h2 id="Push">func <a href="/src/target/string.go?s=4045:4093#L160">Push</a>
 	<a class="permalink" href="#Push">&#xb6;</a>
 </h2>
 <pre>func Push(slc []<a href="/pkg/builtin/#string">string</a>, args ...<a href="/pkg/builtin/#string">string</a>) []<a href="/pkg/builtin/#string">string</a></pre>
 <p>
-Add elements to a slice. Return the modified slice.
+Push adds elements to a slice and returns the modified slice.
+It is a direct call to the built-in &#39;append()&#39; func.
+It is meant to be clear, readable method for stack implementations.
 </p>
 
-<h2 id="Shift">func <a href="/src/target/string.go?s=4241:4284#L180">Shift</a>
+
+<h2 id="Shift">func <a href="/src/target/string.go?s=4755:4798#L186">Shift</a>
 	<a class="permalink" href="#Shift">&#xb6;</a>
 </h2>
 <pre>func Shift(slc []<a href="/pkg/builtin/#string">string</a>) (<a href="/pkg/builtin/#string">string</a>, []<a href="/pkg/builtin/#string">string</a>)</pre>
 <p>
-Remove the first element of a slice.
-Return the removed element along with the modified slice.
+Shift removes the first element of a slice.
+It returns the removed element along with the modified slice.
 </p>
 
-<h2 id="Unshift">func <a href="/src/target/string.go?s=4053:4098#L174">Unshift</a>
+
+<h2 id="Unshift">func <a href="/src/target/string.go?s=4556:4601#L180">Unshift</a>
 	<a class="permalink" href="#Unshift">&#xb6;</a>
 </h2>
 <pre>func Unshift(slc []<a href="/pkg/builtin/#string">string</a>, s <a href="/pkg/builtin/#string">string</a>) []<a href="/pkg/builtin/#string">string</a></pre>
 <p>
-Insert an element at the beginning of a slice,
-and move all the rest of the elements up an index.
-Return the modified slice.
+Unshift inserts an element at the beginning of a slice,
+and moves the rest of the elements up an index.
+It does not overwrite the first element.
+It returns the modified slice.
 </p>
