@@ -78,6 +78,13 @@ func TestIsSameArray(t *testing.T) {
 	}
 }
 
+func TestDuplicate(t *testing.T) {
+	slc1 := []string{"same elements,", "different arrays"}
+	if slc2 := Duplicate(slc1); IsSameArray(slc2, slc1) {
+		t.Error(errExpected(false, slc2, slc1))
+	}
+}
+
 // func BenchmarkStringsReplaceAll(b *testing.B) {
 // 	for i := 0; i < b.N; i++ {
 // 		strings.Replace(TestFileContent, ToFind, ToReplace, -1)
