@@ -129,11 +129,28 @@ func TestUnshift(t *testing.T) {
 	}
 }
 
-// func BenchmarkStringsReplaceAll(b *testing.B) {
-// 	for i := 0; i < b.N; i++ {
-// 		strings.Replace(TestFileContent, ToFind, ToReplace, -1)
-// 	}
-// }
+// Ridiculously faster
+func BenchmarkQueuePushShift(b *testing.B) {
+
+	slc := []string{"deeporange50", "deeporange500", "deeporange900", "deeporangeA100", "deeporangeA200", "deeporangeA400", "deeporangea700", "deeporange-50", "deeporange:500", "deeporange_900", "deeporange A100", "deeporange-A200", "deeporange:A400", "deeporange_A700", "deeporange000", "deeporange1000", "deeporangeA000", "deeporangeA300", "deeporangeA1000", "deeporange:000", "deeporange-1000", "deeporange_A000", "deeporange A300", "deeporange-A1000", "deeporange"}
+
+	for i := 0; i < b.N; i++ {
+		slc = append(slc, "next")
+		slc = slc[1:]
+	}
+}
+
+// Ridiculously slower
+func BenchmarkQueueUnshiftPop(b *testing.B) {
+
+	slc := []string{"deeporange50", "deeporange500", "deeporange900", "deeporangeA100", "deeporangeA200", "deeporangeA400", "deeporangea700", "deeporange-50", "deeporange:500", "deeporange_900", "deeporange A100", "deeporange-A200", "deeporange:A400", "deeporange_A700", "deeporange000", "deeporange1000", "deeporangeA000", "deeporangeA300", "deeporangeA1000", "deeporange:000", "deeporange-1000", "deeporange_A000", "deeporange A300", "deeporange-A1000", "deeporange"}
+	iEnd := len(slc) - 1
+
+	for i := 0; i < b.N; i++ {
+		slc = append([]string{"next"}, slc...)
+		slc = slc[:iEnd]
+	}
+}
 
 func expect(args ...interface{}) error {
 	switch len(args) {
