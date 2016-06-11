@@ -110,7 +110,7 @@ func _expectBasic(boolWanted bool, args ...interface{}) error {
 
 func _expectLabelled(boolWanted bool, args ...interface{}) error {
 	if !_areEqual(args[0], args[1]) {
-		return errExpected(args[2], args[0], args[1])
+		return errExpected(args[0], args[1], args[2])
 	}
 	return nil
 }
@@ -120,12 +120,16 @@ func _areEqual(result interface{}, expected interface{}) bool {
 }
 
 func errExpected(args ...interface{}) error {
+
+	result := args[0]
+	expected := args[1]
+
 	switch len(args) {
 	case 0, 1:
 		return fmt.Errorf("Not enough arguments to _errExpected. Args passed: %v", args)
 	case 2:
-		return fmt.Errorf("Expected '%v' to equal '%v'", args[0], args[1])
+		return fmt.Errorf("Expected '%v' to equal '%v'", result, expected)
 	default:
-		return fmt.Errorf("%v: Expected '%v' to equal '%v'", args[0], args[1], args[2])
+		return fmt.Errorf("%v: Expected '%v' to equal '%v'", args[2], result, expected)
 	}
 }
